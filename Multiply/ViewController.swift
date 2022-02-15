@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var productLabel: UILabel!
     
+    @IBOutlet weak var operatorLabel: UILabel!
     
     @IBOutlet weak var marioKartImage: UIImageView!
     
@@ -30,7 +31,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        marioKartImage.image = UIImage(named: "dry_bones")
     }
     
     
@@ -40,46 +40,62 @@ class ViewController: UIViewController {
         marioKartImage.image = nil
         funnyImage.image = nil
         productLabel.text = ""
+        operatorLabel.text = ""
     }
     
     @IBAction func addButton(_ sender: Any) {
         if subtraction == true || division == true || multiplication == true {
-                addition = false
+                addition = true
+                subtraction = false
+                division = false
+                multiplication = false
+                operatorLabel.text = "+"
         }
         else {
         addition = true
+            operatorLabel.text = "+"
     }
     }
     
     @IBAction func subtractButton(_ sender: Any) {
         if addition == true || division == true || multiplication == true {
-            subtraction = false
+            subtraction = true
+            addition = false
+            division = false
+            multiplication = false
+            operatorLabel.text = "-"
         }
         else {
         subtraction = true
+            operatorLabel.text = "-"
     }
     }
     
     @IBAction func divideButton(_ sender: Any) {
         if addition == true || subtraction == true || multiplication == true {
             division = true
-            addition == false
-            multiplication == false
-            subtraction == false
-            
+            addition = false
+            multiplication = false
+            subtraction = false
+            operatorLabel.text = "/"
         }
         else {
-        
+            operatorLabel.text = "/"
         division = true
     }
     }
     
     @IBAction func multiplyButton(_ sender: Any) {
         if division == true || addition == true || subtraction == true {
-            multiplication = false
+            multiplication = true
+            division = false
+            subtraction = false
+            addition = false
+            operatorLabel.text = "*"
         }
         else {
         multiplication = true
+            operatorLabel.text = "*"
     }
     }
     
@@ -96,7 +112,7 @@ class ViewController: UIViewController {
         firstNumber.endEditing(true)
         secondNumber.endEditing(true)
         if product == 64 {
-            marioKartImage.isHidden = false
+            marioKartImage.image = UIImage(named: "dry_bones")
         }
      
         if product.truncatingRemainder(dividingBy: 2) == 0 {
